@@ -80,6 +80,16 @@
             margin-bottom:20px;
             font-size:14px;
         }
+
+        .alert-success{
+            background:#10b981;
+            color:white;
+            padding:12px;
+            border-radius:8px;
+            margin-bottom:20px;
+            text-align:center;
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -88,19 +98,50 @@
         <h2>Form Pendaftaran</h2>
         <p class="subtitle">Silakan isi data diri Anda</p>
 
-        <!-- PERUBAHAN ADA DI SINI: action="/" dihapus -->
-        <form method="post">
+        <div id="alert" class="alert-success"></div>
 
+        <form id="daftarForm">
             <label>Nama Depan</label>
-            <input type="text" name="namaDepan" required>
+            <input type="text" id="namaDepan" name="namaDepan" required>
 
             <label>Nama Belakang</label>
-            <input type="text" name="namaBelakang" required>
+            <input type="text" id="namaBelakang" name="namaBelakang" required>
 
             <input type="submit" value="Kirim">
-
         </form>
     </div>
 
+    <script>
+        // Ambil elemen form dan input
+        const form = document.getElementById('daftarForm');
+        const namaDepan = document.getElementById('namaDepan');
+        const namaBelakang = document.getElementById('namaBelakang');
+        const alertBox = document.getElementById('alert');
+
+        // Tangani saat form dikirim
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah refresh halaman
+            
+            const depan = namaDepan.value;
+            const belakang = namaBelakang.value;
+            
+            // Tampilkan pesan sukses
+            alertBox.textContent = `✅ Terima kasih ${depan} ${belakang}, pendaftaran berhasil!`;
+            alertBox.style.display = 'block';
+            alertBox.style.backgroundColor = '#10b981';
+            
+            // Hapus pesan setelah 3 detik
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 3000);
+            
+            // Kosongkan form (opsional - kalau mau otomatis kosong)
+            // form.reset();
+            
+            // Atau biarkan data tetap ada (hapus tanda // di bawah kalau mau otomatis kosong)
+            // namaDepan.value = '';
+            // namaBelakang.value = '';
+        });
+    </script>
 </body>
 </html>
