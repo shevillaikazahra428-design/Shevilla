@@ -1,17 +1,105 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-   <title>Demo Text</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendaftaran</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#4f46e5,#06b6d4);
+            padding:20px;
+        }
+
+        .card{
+            background:white;
+            width:100%;
+            max-width:400px;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#1e293b;
+        }
+
+        label{
+            display:block;
+            margin-bottom:5px;
+            color:#334155;
+            font-weight:bold;
+        }
+
+        input[type="text"]{
+            width:100%;
+            padding:12px;
+            margin-bottom:18px;
+            border:1px solid #cbd5e1;
+            border-radius:8px;
+            font-size:14px;
+        }
+
+        input[type="text"]:focus{
+            outline:none;
+            border-color:#4f46e5;
+        }
+
+        input[type="submit"]{
+            width:100%;
+            padding:12px;
+            background:#4f46e5;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:15px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        input[type="submit"]:hover{
+            background:#4338ca;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#64748b;
+            margin-bottom:20px;
+            font-size:14px;
+        }
+    </style>
 </head>
 <body>
-   <h2>Demo Text</h2>
-   
-   <form action="/" method="post">
-      Nama depan:<br />
-      <input type="text" name="namaDepan" size="25" /><br />
-      Nama belakang:<br />
-      <input type="text" name="namaBelakang" size="25" />
-      <p><input type="submit"  value="Kirim" /></p>
-   </form>
-   
+
+    <div class="card">
+        <h2>Form Pendaftaran</h2>
+        <p class="subtitle">Silakan isi data diri Anda</p>
+
+        <form action="/" method="post">
+
+            <label>Nama Depan</label>
+            <input type="text" name="namaDepan" required>
+
+            <label>Nama Belakang</label>
+            <input type="text" name="namaBelakang" required>
+
+            <input type="submit" value="Kirim">
+
+        </form>
+    </div>
+
 </body>
 </html>
