@@ -1,67 +1,17 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Form Data</title>
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            background:#f4f4f4;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
-
-        .container{
-            background:white;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0 0 10px rgba(0,0,0,0.1);
-            width:300px;
-        }
-
-        h2{
-            text-align:center;
-        }
-
-        input{
-            width:100%;
-            padding:10px;
-            margin-top:5px;
-            margin-bottom:15px;
-            border:1px solid #ccc;
-            border-radius:5px;
-            box-sizing:border-box;
-        }
-
-        button{
-            width:100%;
-            padding:10px;
-            background:#007bff;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-        }
-
-        button:hover{
-            background:#0056b3;
-        }
-    </style>
+   <title>Demo Text</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Form Biodata</h2>
-
-        <form method="POST">
-            <label>Nama Depan</label>
-            <input type="text" name="firstname" required>
-
-            <label>Nama Belakang</label>
-            <input type="text" name="lastname" required>
-
-            <button type="submit">Kirim</button>
-        </form>
-    </div>
+   <h2>Demo Text</h2>
+   
+   <form action="/" method="post">
+      Nama depan:<br />
+      <input type="text" name="namaDepan" size="25" /><br />
+      Nama belakang:<br />
+      <input type="text" name="namaBelakang" size="25" />
+      <p><input type="submit"  value="Kirim" /></p>
+   </form>
+   
 </body>
 </html>
