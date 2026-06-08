@@ -1,235 +1,47 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pendaftaran</title>
-
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg,#4f46e5,#06b6d4);
         }
-
-        body{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            background:linear-gradient(135deg,#4f46e5,#06b6d4);
-            padding:20px;
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
         }
-
-        .card{
-            background:white;
-            width:100%;
-            max-width:450px;
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
         }
-
-        h2{
-            text-align:center;
-            margin-bottom:25px;
-            color:#1e293b;
-        }
-
-        label{
-            display:block;
-            margin-bottom:8px;
-            color:#334155;
-            font-weight:bold;
-            font-size:14px;
-        }
-
-        input[type="text"]{
-            width:100%;
-            padding:12px;
-            margin-bottom:20px;
-            border:1px solid #cbd5e1;
-            border-radius:8px;
-            font-size:14px;
-            transition:0.3s;
-        }
-
-        input[type="text"]:focus{
-            outline:none;
-            border-color:#4f46e5;
-            box-shadow:0 0 0 3px rgba(79,70,229,0.1);
-        }
-
-        input[type="submit"]{
-            width:100%;
-            padding:12px;
-            background:#4f46e5;
-            color:white;
-            border:none;
-            border-radius:8px;
-            font-size:15px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
-        }
-
-        input[type="submit"]:hover{
-            background:#4338ca;
-            transform:translateY(-2px);
-        }
-
-        .subtitle{
-            text-align:center;
-            color:#64748b;
-            margin-bottom:25px;
-            font-size:14px;
-        }
-
-        .alert-success{
-            background:#10b981;
-            color:white;
-            padding:12px;
-            border-radius:8px;
-            margin-bottom:20px;
-            text-align:center;
-            display:none;
-            font-size:14px;
-        }
-
-        .alert-error{
-            background:#ef4444;
-            color:white;
-            padding:10px;
-            border-radius:8px;
-            margin-bottom:20px;
-            text-align:center;
-            display:none;
-            font-size:13px;
-        }
-
-        .data-preview{
-            background:#f1f5f9;
-            padding:15px;
-            border-radius:8px;
-            margin-top:20px;
-            display:none;
-            border-left:4px solid #4f46e5;
-        }
-
-        .data-preview h4{
-            color:#1e293b;
-            margin-bottom:10px;
-            font-size:14px;
-        }
-
-        .data-preview p{
-            color:#334155;
-            font-size:13px;
-            margin:5px 0;
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-
     <div class="card">
-        <h2>📝 Form Pendaftaran</h2>
-        <p class="subtitle">Silakan isi data diri Anda</p>
-
-        <div id="alertSuccess" class="alert-success"></div>
-        <div id="alertError" class="alert-error"></div>
-
-        <form id="daftarForm">
-            <label>👤 Nama Depan</label>
-            <input type="text" id="namaDepan" name="namaDepan" placeholder="Masukkan nama depan" required>
-
-            <label>👥 Nama Belakang</label>
-            <input type="text" id="namaBelakang" name="namaBelakang" placeholder="Masukkan nama belakang" required>
-
-            <input type="submit" value="✅ Kirim Pendaftaran">
+        <h2>Form Pendaftaran</h2>
+        <form action="response.html" method="get">
+            <label>Nama Depan:</label>
+            <input type="text" name="namaDepan" required>
+            
+            <label>Nama Belakang:</label>
+            <input type="text" name="namaBelakang" required>
+            
+            <button type="submit">Kirim Pendaftaran</button>
         </form>
-
-        <div id="dataPreview" class="data-preview">
-            <h4>📋 Data Pendaftar:</h4>
-            <p id="previewDepan"></p>
-            <p id="previewBelakang"></p>
-        </div>
     </div>
-
-    <script>
-        // Ambil elemen
-        const form = document.getElementById('daftarForm');
-        const namaDepan = document.getElementById('namaDepan');
-        const namaBelakang = document.getElementById('namaBelakang');
-        const alertSuccess = document.getElementById('alertSuccess');
-        const alertError = document.getElementById('alertError');
-        const dataPreview = document.getElementById('dataPreview');
-        const previewDepan = document.getElementById('previewDepan');
-        const previewBelakang = document.getElementById('previewBelakang');
-
-        // Sembunyikan alert setelah beberapa detik
-        function hideAlertAfter(alertElement, time) {
-            setTimeout(() => {
-                alertElement.style.display = 'none';
-            }, time);
-        }
-
-        // Tangani saat form dikirim
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah refresh
-            
-            const depan = namaDepan.value.trim();
-            const belakang = namaBelakang.value.trim();
-            
-            // Validasi manual
-            if(depan === '') {
-                alertError.textContent = '⚠️ Nama Depan tidak boleh kosong!';
-                alertError.style.display = 'block';
-                alertSuccess.style.display = 'none';
-                namaDepan.focus();
-                hideAlertAfter(alertError, 3000);
-                return;
-            }
-            
-            if(belakang === '') {
-                alertError.textContent = '⚠️ Nama Belakang tidak boleh kosong!';
-                alertError.style.display = 'block';
-                alertSuccess.style.display = 'none';
-                namaBelakang.focus();
-                hideAlertAfter(alertError, 3000);
-                return;
-            }
-            
-            // Jika semua terisi ✅
-            alertSuccess.textContent = `🎉 Selamat! ${depan} ${belakang}, pendaftaran Anda berhasil!`;
-            alertSuccess.style.display = 'block';
-            alertError.style.display = 'none';
-            
-            // Tampilkan preview data
-            previewDepan.innerHTML = `<strong>Nama Depan:</strong> ${depan}`;
-            previewBelakang.innerHTML = `<strong>Nama Belakang:</strong> ${belakang}`;
-            dataPreview.style.display = 'block';
-            
-            // Sembunyikan alert sukses setelah 3 detik
-            hideAlertAfter(alertSuccess, 3000);
-            
-            // Opsional: Reset form (buka komentar di bawah kalau mau form kosong lagi)
-            // form.reset();
-            
-            // Opsional: Hapus preview setelah 5 detik (buka komentar di bawah)
-            // setTimeout(() => {
-            //     dataPreview.style.display = 'none';
-            // }, 5000);
-        });
-
-        // Validasi real-time (hilangkan pesan error saat mulai mengetik)
-        namaDepan.addEventListener('input', function() {
-            alertError.style.display = 'none';
-        });
-        
-        namaBelakang.addEventListener('input', function() {
-            alertError.style.display = 'none';
-        });
-    </script>
 </body>
 </html>
